@@ -251,6 +251,7 @@ const Game = () => {
         plateVelocityRef.current = lift;
       }
     };
+
     const handleTouchStart = (event) => {
       event.preventDefault();
       plateVelocityRef.current = lift;
