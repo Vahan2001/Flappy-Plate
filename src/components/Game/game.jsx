@@ -253,13 +253,19 @@ const Game = () => {
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("touchstart", handleTouchStart);
     animate();
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("touchstart", handleTouchStart);
       cancelAnimationFrame(animationRef.current);
     };
   }, [isGameOver, isGameStarted, countdown]);
+
+  const handleTouchStart = (event) => {
+    plateVelocityRef.current = lift;
+  };
 
   const handleStartGame = () => {
     setIsGameStarted(true);
