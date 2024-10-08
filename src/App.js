@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Game from "./components/Game/game";
+import Game from "./components/Game/game.js";
 
 function App() {
   useEffect(() => {
