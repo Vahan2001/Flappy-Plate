@@ -1,5 +1,4 @@
-import { Telegraf } from "telegraf";
-
+const { Telegraf } = require("telegraf");
 const token = "7884229685:AAEXyg07duhA7IA62_BAmOnziDq36w_5TZI"; // Замените на ваш токен
 const url = "https://flappy-plate.vercel.app/"; // Ссылка на ваш WebApp
 

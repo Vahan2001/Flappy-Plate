@@ -25,6 +25,7 @@ const Game = () => {
   const [score, setScore] = useState(0);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [countdown, setCountdown] = useState(3); // New countdown state
+  const [canvasSize, setCanvasSize] = useState({ width: 500, height: 400 });
 
   const buildingWidth = 50;
   const gapHeight = 160;
@@ -106,6 +107,22 @@ const Game = () => {
     }
     return newBuildings;
   };
+
+  useEffect(() => {
+    // Устанавливаем размеры канваса в зависимости от размера экрана
+    const handleResize = () => {
+      const width = window.innerWidth < 500 ? window.innerWidth : 500; // Максимальная ширина 500
+      const height = (width / 500) * 400; // Пропорциональная высота
+      setCanvasSize({ width, height });
+    };
+
+    handleResize(); // Устанавливаем начальные размеры
+    window.addEventListener("resize", handleResize); // Добавляем обработчик изменения размера окна
+
+    return () => {
+      window.removeEventListener("resize", handleResize); // Удаляем обработчик при размонтировании
+    };
+  }, []);
 
   useEffect(() => {
     if (!isGameStarted) return;
@@ -306,9 +323,9 @@ const Game = () => {
     >
       <canvas
         ref={canvasRef}
-        width={500}
-        height={400}
-        style={{ border: "1px solid black", backgroundColor: "gray" }}
+        width={canvasSize.width}
+        height={canvasSize.height}
+        style={{ backgroundColor: "#87CEEB" }}
       />
       {isGameOver && (
         <div
