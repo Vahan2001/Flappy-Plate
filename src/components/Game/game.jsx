@@ -251,6 +251,10 @@ const Game = () => {
         plateVelocityRef.current = lift;
       }
     };
+    const handleTouchStart = (event) => {
+      event.preventDefault();
+      plateVelocityRef.current = lift;
+    };
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("touchstart", handleTouchStart);
@@ -262,10 +266,6 @@ const Game = () => {
       cancelAnimationFrame(animationRef.current);
     };
   }, [isGameOver, isGameStarted, countdown]);
-
-  const handleTouchStart = (event) => {
-    plateVelocityRef.current = lift;
-  };
 
   const handleStartGame = () => {
     setIsGameStarted(true);
