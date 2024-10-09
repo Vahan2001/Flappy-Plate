@@ -114,7 +114,7 @@ const Game = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth < 500 ? window.innerWidth : 500;
-      const height = window.innerHeight;
+      const height = window.innerHeight - 50;
       setCanvasSize({ width, height });
     };
 
