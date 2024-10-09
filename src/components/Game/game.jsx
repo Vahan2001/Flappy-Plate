@@ -340,7 +340,7 @@ const Game = () => {
         ref={canvasRef}
         width={canvasSize.width}
         height={canvasSize.height}
-        style={{ backgroundColor: "#87CEEB" }}
+        style={{ backgroundColor: "gray" }}
       />
       {isGameOver && (
         <div
