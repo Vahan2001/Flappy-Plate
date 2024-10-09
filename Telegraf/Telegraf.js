@@ -1,10 +1,10 @@
 const { Telegraf } = require("telegraf");
-const token = "7884229685:AAEXyg07duhA7IA62_BAmOnziDq36w_5TZI"; // Замените на ваш токен
-const url = "https://flappy-plate.vercel.app/"; // Ссылка на ваш WebApp
+
+const token = "7884229685:AAEXyg07duhA7IA62_BAmOnziDq36w_5TZI";
+const url = "https://flappy-plate.vercel.app/";
 
 const bot = new Telegraf(token);
 
-// Обработчик команды /start
 bot.start((ctx) => {
   ctx.reply("Добро пожаловать!", {
     reply_markup: {
@@ -12,7 +12,7 @@ bot.start((ctx) => {
         [
           {
             text: "Начать игру",
-            url: url, // Ссылка на ваш WebApp
+            url: url,
           },
         ],
       ],
@@ -20,5 +20,4 @@ bot.start((ctx) => {
   });
 });
 
-// Запускаем бот
 bot.launch();

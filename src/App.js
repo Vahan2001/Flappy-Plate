@@ -4,7 +4,7 @@ import Game from "./components/Game/game";
 function App() {
   useEffect(() => {
     const tg = window.Telegram.WebApp;
-    tg.ready(); // Инициализация Telegram WebApp
+    tg.ready();
 
     tg.MainButton.setParams({
       text: "End Game",
@@ -12,11 +12,11 @@ function App() {
     });
 
     tg.MainButton.onClick(() => {
-      tg.close(); // Закрыть WebApp при нажатии кнопки
+      tg.close();
     });
 
     return () => {
-      tg.MainButton.offClick(); // Убираем обработчик при размонтировании
+      tg.MainButton.offClick();
     };
   }, []);
 
@@ -24,14 +24,11 @@ function App() {
     console.log(`Game ended! Time spent: ${timeSpent} seconds`);
     const tg = window.Telegram.WebApp;
 
-    tg.sendData(JSON.stringify({ timeSpent })); // Отправляем данные о времени в Telegram WebApp
+    tg.sendData(JSON.stringify({ timeSpent }));
   };
 
   return (
     <div>
-      <header>
-        <h1>Telegram Canvas Game</h1>
-      </header>
       <main>
         <Game difficulty={1} onGameEnd={handleGameEnd} />
       </main>

@@ -28,8 +28,8 @@ const Game = () => {
   const [canvasSize, setCanvasSize] = useState({ width: 500, height: 400 });
 
   const buildingWidth = 50;
-  const gapHeight = 160;
-  const gapWidth = 110;
+  const gapHeight = 190;
+  const gapWidth = 180;
   const speed = 2;
   const plateWidth = 40;
   const plateHeight = 20;
@@ -39,7 +39,6 @@ const Game = () => {
   const lift = -5;
   const animationRef = useRef(null);
 
-  // Загружаем изображения
   plateImageRef.current.src = plateImg;
   topImageRef.current.src = topImage;
 
@@ -78,7 +77,7 @@ const Game = () => {
 
     for (let i = 0; i < totalBuildings; i++) {
       const minBuildingHeight = 50;
-      const maxTopHeight = canvas.height / 3;
+      const maxTopHeight = canvas.height - gapHeight - minBuildingHeight;
       const topHeight =
         Math.random() * (maxTopHeight - minBuildingHeight) + minBuildingHeight;
       const bottomHeight = canvas.height - topHeight - gapHeight;
@@ -109,18 +108,17 @@ const Game = () => {
   };
 
   useEffect(() => {
-    // Устанавливаем размеры канваса в зависимости от размера экрана
     const handleResize = () => {
-      const width = window.innerWidth < 500 ? window.innerWidth : 500; // Максимальная ширина 500
-      const height = (width / 500) * 400; // Пропорциональная высота
+      const width = window.innerWidth < 500 ? window.innerWidth : 500;
+      const height = window.innerHeight;
       setCanvasSize({ width, height });
     };
 
-    handleResize(); // Устанавливаем начальные размеры
-    window.addEventListener("resize", handleResize); // Добавляем обработчик изменения размера окна
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize); // Удаляем обработчик при размонтировании
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
