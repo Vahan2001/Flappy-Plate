@@ -114,7 +114,7 @@ const Game = () => {
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth < 500 ? window.innerWidth : 500;
-      const height = window.innerHeight;
+      const height = window.innerHeight - 40;
       setCanvasSize({ width, height });
     };
 
@@ -340,7 +340,7 @@ const Game = () => {
         ref={canvasRef}
         width={canvasSize.width}
         height={canvasSize.height}
-        style={{ backgroundColor: "gray", marginTop: "70px" }}
+        style={{ backgroundColor: "gray", marginTop: "40px" }}
       />
       {isGameOver && (
         <div
