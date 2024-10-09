@@ -13,18 +13,22 @@ import buildingBottom6 from "../../assets/images/bottom/IMG_7149.PNG";
 import buildingBottom7 from "../../assets/images/bottom/IMG_7150.PNG";
 import buildingBottom8 from "../../assets/images/bottom/IMG_7151.PNG";
 import topImage from "../../assets/images/IMG_7137.PNG";
+import startSound from "../../assets/sound/plateSound.mp3";
+import collisionSound from "../../assets/sound/collision.mp3";
 
 const Game = () => {
   const marginTop = 45;
   const canvasRef = useRef(null);
   const plateImageRef = useRef(new Image());
   const topImageRef = useRef(new Image());
+  const startAudio = new Audio(startSound);
+  const collisionAudio = new Audio(collisionSound);
 
   const [buildings, setBuildings] = useState([]);
   const [isGameOver, setIsGameOver] = useState(false);
   const [score, setScore] = useState(0);
   const [isGameStarted, setIsGameStarted] = useState(false);
-  const [countdown, setCountdown] = useState(3); // New countdown state
+  const [countdown, setCountdown] = useState(3);
   const [canvasSize, setCanvasSize] = useState({ width: 500, height: 400 });
 
   const buildingWidth = 50;
@@ -184,7 +188,7 @@ const Game = () => {
       const plateY = plateYRef.current;
       const plateBottom = plateY + plateHeight;
 
-      return newBuildings.some((building) => {
+      const isCollided = newBuildings.some((building) => {
         const buildingTop = building.topHeight + marginTop;
         const buildingBottom = canvas.height - building.bottomHeight;
 
@@ -197,6 +201,13 @@ const Game = () => {
           (plateY < buildingTop || isInGap || plateBottom >= buildingBottom)
         );
       });
+
+      if (isCollided) {
+        collisionAudio.currentTime = 0;
+        collisionAudio.play();
+      }
+
+      return isCollided;
     };
 
     const updatePositions = () => {
@@ -243,11 +254,15 @@ const Game = () => {
 
       if (plateYRef.current + plateHeight >= canvas.height) {
         setIsGameOver(true);
+        startAudio.pause();
+        startAudio.currentTime = 0;
         cancelAnimationFrame(animationRef.current);
       }
 
       if (checkCollision()) {
         setIsGameOver(true);
+        startAudio.pause();
+        startAudio.currentTime = 0;
         cancelAnimationFrame(animationRef.current);
       }
 
@@ -308,6 +323,8 @@ const Game = () => {
   useEffect(() => {
     if (countdown === 0 && isGameStarted) {
       setIsGameStarted(true);
+      startAudio.play();
+      startAudio.loop = true;
     }
   }, [countdown, isGameStarted]);
 
