@@ -2,14 +2,15 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Убирает прокрутку */
-  height: 100%; /* Задает высоту 100% для тела */
-  width: 100%; /* Задает ширину 100% для тела */
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  touch-action: none;
 }
 
 #root {
-  height: 100%; /* Задает высоту 100% для элемента root */
-  width: 100%; /* Задает ширину 100% для элемента root */
+  height: 100%;
+  width: 100%;
 }
 
 .App {
